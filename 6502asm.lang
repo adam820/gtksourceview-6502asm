@@ -38,10 +38,12 @@
     <style id="operator"        _name="Operator"            map-to="def:operator"/>
   </styles>
 
+  <default-regex-options case-sensitive="false" />
+
   <definitions>
     <context id="6502asm">
       <include>
-            <context id="opcodes" style-ref="opcode">
+            <context id="opcodes" style-ref="opcode" >
                 <keyword>ADC</keyword>
                 <keyword>AND</keyword>
                 <keyword>ASL</keyword>
@@ -141,11 +143,15 @@
             </context>
 
             <context id="hexadecimal-number" style-ref="hex-group">
-                <match>(\$[\da-fA-F]{2})</match>
+                <match>(\()?(\$[\da-fA-F]{2})(\))?(\,[xXyY])?</match>
             </context>
 
-		<context id="hexadecimal-number2" style-ref="preprocessor">
+	    <context id="hexadecimal-number2" style-ref="preprocessor">
                 <match>(\#\$[\da-fA-F]{2})</match>
+            </context>
+
+	    <context id="binary-number" style-ref="datatype">
+                <match>(\#\%)([\d]{8})</match>
             </context>
 
             <context id="alias-reference" style-ref="datatype">
